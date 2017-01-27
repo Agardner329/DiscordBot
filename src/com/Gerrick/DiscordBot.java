@@ -22,6 +22,7 @@ public class DiscordBot {
         } catch(Exception e){
 
             e.printStackTrace();
+
         }
 
 
