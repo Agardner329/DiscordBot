@@ -1,4 +1,4 @@
-package com.Gerrick;
+package com.gerrick;
 
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
@@ -18,6 +18,8 @@ public class DiscordBot {
         try{
 
             bot = new JDABuilder(AccountType.BOT).setToken(TOKEN).buildBlocking();
+
+            bot.setAutoReconnect(false);
 
         } catch(Exception e){
 
