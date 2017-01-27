@@ -9,15 +9,15 @@ import net.dv8tion.jda.core.JDABuilder;
  */
 public class DiscordBot {
 
-    private static final String TOKEN = "274642025465511936";
+    private static final String TOKEN = "Mjc0NjQyMDI1NDY1NTExOTM2.C21D4g.MuX7gTzksD1VIjGmUGenGhW7UzI";
 
-    private static JDA jda;
+    private static JDA bot;
 
-    public static void Main(String[] args){
+    public static void main(String[] args){
 
         try{
 
-            jda = new JDABuilder(AccountType.BOT).setToken(TOKEN).buildBlocking();
+            bot = new JDABuilder(AccountType.BOT).setToken(TOKEN).buildBlocking();
 
         } catch(Exception e){
 
