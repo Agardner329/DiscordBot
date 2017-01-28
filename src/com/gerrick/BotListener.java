@@ -5,10 +5,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 /**
- * Created by Alex Gardner on 1/27/2017.
+ * Created by Alex Gardner on 1/27/2017
  */
 public class BotListener extends ListenerAdapter{
 
+    /**
+     * Tests all incoming messages to ensure they were not sent by the bot, and begin with the command character
+     *
+     * @param event the event object specific to the message received
+     */
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
 
@@ -20,12 +25,17 @@ public class BotListener extends ListenerAdapter{
         //Check that message is command
         if(event.getMessage().getContent().substring(0, 1).equals("!")){
 
-            DiscordBot.handleCommand(event);
+            DiscordBot.handleCommand(event);//Sends back to main to handle
 
         }
 
     }
 
+    /**
+     * Logs the status of the bot upon initial connection
+     *
+     * @param event The information of the event
+     */
     @Override
     public void onReady(ReadyEvent event){
         DiscordBot.log("Status", "Logged in as: " + event.getJDA().getSelfUser().getName());
