@@ -5,4 +5,8 @@ package com.gerrick;
  */
 public class MisusedCommandException extends Exception {
 
+    public MisusedCommandException(String error){
+        super(error);
+    }
+
 }

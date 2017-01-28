@@ -11,7 +11,7 @@ public class PingCommand implements Command {
 
     @Override
     public void action(CommandData command) {
-        command.event.getTextChannel().sendMessage("Pong!");
+        command.event.getTextChannel().sendMessage("Pong!").queue();
     }
 
     @Override
@@ -19,8 +19,4 @@ public class PingCommand implements Command {
         return HELP;
     }
 
-    @Override
-    public boolean isSafe(CommandData command){
-        return true;
-    }
 }

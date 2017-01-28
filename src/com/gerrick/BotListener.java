@@ -1,6 +1,5 @@
 package com.gerrick;
 
-import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -18,8 +17,8 @@ public class BotListener extends ListenerAdapter{
             return;
         }
 
-        //Check that message is type
-        if(event.getMessage().getContent().startsWith("!")){
+        //Check that message is command
+        if(event.getMessage().getContent().substring(0, 1).equals("!")){
 
             DiscordBot.handleCommand(event);
 

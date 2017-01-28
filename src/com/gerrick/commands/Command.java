@@ -11,6 +11,4 @@ public interface Command {
 
     String help();
 
-    boolean isSafe(CommandData command);
-
 }

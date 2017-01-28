@@ -32,7 +32,7 @@ public class DiscordBot {
 
             bot = new JDABuilder(AccountType.BOT).addListener(new BotListener()).setToken(TOKEN).buildBlocking();
 
-            bot.setAutoReconnect(false);
+            bot.setAutoReconnect(true);
 
         } catch(Exception e){
 
@@ -53,14 +53,23 @@ public class DiscordBot {
 
         CommandData command = new CommandData(event);
 
-        if(commands.containsKey(command.type) && commands.get(command.type).isSafe(command)){
+        if(commands.containsKey(command.type)){
 
             try {
+
                 commands.get(command.type).action(command);
+
             } catch(MisusedCommandException e){
                 log("Command Error", e.getMessage());
-                command.event.getTextChannel().sendMessage(e.getMessage());
+                command.event.getTextChannel().sendMessage(e.getMessage()).queue();
             }
+
+        }else{
+
+            String error = command.author.getName() + " gave a bad command";
+            
+            log("Command Error", error);
+            command.event.getTextChannel().sendMessage(error).queue();
 
         }
 

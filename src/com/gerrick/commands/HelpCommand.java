@@ -14,12 +14,28 @@ public class HelpCommand implements Command {
     @Override
     public void action(CommandData command) throws MisusedCommandException {
 
+        TextChannel channel = command.event.getTextChannel();
+
         if(command.args.length == 0){
-            TextChannel channel = command.event.getTextChannel();
-            channel.sendMessage("Available Commands:");
+
+            channel.sendMessage("Available Commands:").queue();
+
             for(String key : DiscordBot.commands.keySet()){
-                channel.sendMessage(key + ": " + DiscordBot.commands.get(key).help());
+                channel.sendMessage(key + ": " + DiscordBot.commands.get(key).help()).queue();
             }
+        }else{
+
+            if(!DiscordBot.commands.containsKey(command.args[0])){
+
+                DiscordBot.log("Debug", command.args[0]);
+                throw new MisusedCommandException(command.author.getName() + " gave a bad command");
+
+            }else{
+
+                channel.sendMessage(DiscordBot.commands.get(command.args[0]).help()).queue();
+
+            }
+
         }
 
     }
@@ -27,16 +43,5 @@ public class HelpCommand implements Command {
     @Override
     public String help() {
         return HELP;
-    }
-
-    @Override
-    public boolean isSafe(CommandData command) {
-
-        if(command.args.length == 0 || DiscordBot.commands.containsKey(command.args[0])){
-            return true;
-        }
-
-        return false;
-
     }
 }
