@@ -7,16 +7,11 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
  */
 public class PingCommand implements Command {
 
-    private final String HELP = "Usage: !ping";
+    private static final String HELP = "Usage: !ping";
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent event) {
-        event.getTextChannel().sendMessage("Pong!");
+    public void action(CommandData command) {
+        command.event.getTextChannel().sendMessage("Pong!");
     }
 
     @Override
@@ -25,7 +20,7 @@ public class PingCommand implements Command {
     }
 
     @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        return;
+    public boolean isSafe(CommandData command){
+        return true;
     }
 }
