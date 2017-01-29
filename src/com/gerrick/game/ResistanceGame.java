@@ -19,12 +19,19 @@ public class ResistanceGame {
 
     }
 
+    /**
+     * Adds a player to the list of players
+     *
+     * @param player
+     */
     public void addPlayer(User player){
-        players.add(player);
+        if(!players.contains(player)){
+            players.add(player);
+        }
     }
 
-    public void removePlayer(User player){
-        players.remove(player);
+    public boolean removePlayer(User player){
+        return players.remove(player);
     }
 
 

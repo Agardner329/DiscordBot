@@ -4,7 +4,7 @@ package com.gerrick.commands;
 /**
  * Created by Alex Gardner on 1/27/2017
  */
-public class PingCommand implements Command {
+public class PingCommand extends Command {
 
     //The help string
     private static final String HELP = "Usage: !ping";

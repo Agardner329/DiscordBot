@@ -1,16 +1,14 @@
 package com.gerrick;
 
-import com.gerrick.commands.Command;
-import com.gerrick.commands.CommandData;
-import com.gerrick.commands.HelpCommand;
-import com.gerrick.commands.PingCommand;
+import com.gerrick.commands.*;
+import com.gerrick.commands.gameCommands.*;
+import com.gerrick.game.ResistanceGame;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -22,7 +20,8 @@ public class DiscordBot {
 
     private static JDA bot;
 
-    public static HashMap<String, Command> commands = new HashMap<>();
+    public static HashMap<String, Command> COMMANDS = new HashMap<>();
+    public static HashMap<TextChannel, ResistanceGame> GAMES = new HashMap<>();
 
     /**
      * Sets up a Discord Bot
@@ -48,12 +47,16 @@ public class DiscordBot {
     }
 
     /**
-     * Sets up all commands to be put in the commands hash map
+     * Sets up all COMMANDS to be put in the COMMANDS hash map
      */
     private static void setupCommands(){
 
-        commands.put("ping", new PingCommand());
-        commands.put("help", new HelpCommand());
+        COMMANDS.put("ping", new PingCommand());
+        COMMANDS.put("help", new HelpCommand());
+        COMMANDS.put("create", new CreateGameCommand());
+        COMMANDS.put("join", new JoinGameCommand());
+        COMMANDS.put("leave", new LeaveGameCommand());
+        COMMANDS.put("start", new StartGameCommand());
 
     }
 
@@ -63,17 +66,17 @@ public class DiscordBot {
      *      printing error statements in both the log and channel from which the message came if
      *      it cannot be executed
      *
-     * @param event Command Given
+     * @param event Command given
      */
     public static void handleCommand(MessageReceivedEvent event){
 
         CommandData command = new CommandData(event);
 
-        if(commands.containsKey(command.type)){//Checks to see if a valid command was entered
+        if(COMMANDS.containsKey(command.type)){//Checks to see if a valid command was entered
 
             try {//Executes the command, catching errors
 
-                commands.get(command.type).action(command);
+                COMMANDS.get(command.type).action(command);
 
             } catch(MisusedCommandException e){//Prints the specifics of the error into the log and text channel
                 log("Command Error", e.getMessage());
@@ -101,8 +104,8 @@ public class DiscordBot {
      */
     public static void log(String type, String message){
 
-        SimpleDateFormat time = new SimpleDateFormat("[HH:mm:ss]");
-        String timeString = time.format(new Date());
+        java.text.SimpleDateFormat time = new java.text.SimpleDateFormat("[HH:mm:ss]");
+        String timeString = time.format(new java.util.Date());
 
         System.out.println(timeString + " [" + type + "]: " + message);
     }
