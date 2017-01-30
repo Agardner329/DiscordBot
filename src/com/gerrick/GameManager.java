@@ -34,6 +34,22 @@ public class GameManager {
 
     }
 
+    public static ResistanceGame getGameOf(User player){
+
+        for(TextChannel channel : GAMES.keySet()){
+
+            if(GAMES.get(channel).hasPlayer(player)){
+
+                return GAMES.get(channel);
+
+            }
+
+        }
+
+        return null;
+
+    }
+
     public static ResistanceGame getGame(TextChannel channel){
 
         return GAMES.get(channel);
