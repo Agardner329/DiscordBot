@@ -1,15 +1,20 @@
 package com.gerrick.commands;
 
+import com.gerrick.CommandManager;
 import com.gerrick.DiscordBot;
 import com.gerrick.MisusedCommandException;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.PrivateChannel;
 
 /**
  * Created by Alex Gardner on 1/27/2017
  */
 public class HelpCommand extends Command {
 
-    private static final String HELP = "Usage: !help or !help (command)";
+    public HelpCommand(){
+        this.help = "Usage: !help or !help (command)";
+        this.canUseThroughDM = true;
+        this.canUseThroughServer = true;
+    }
 
     /**
      * Prints either the possible COMMANDS, or the help string about a requested command
@@ -18,28 +23,44 @@ public class HelpCommand extends Command {
      * @throws MisusedCommandException If the requested command does not exist
      */
     @Override
-    public void action(CommandData command) throws MisusedCommandException {
+    protected void action(CommandData command) throws MisusedCommandException, IllegalArgumentException {
 
         //Acquires the channel of the message
-        TextChannel channel = command.event.getTextChannel();
+        if(!command.author.hasPrivateChannel()) {
+
+            command.author.openPrivateChannel().queue();
+
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e){
+                e.printStackTrace();
+                System.exit(1);
+            }
+
+        }
+
+        PrivateChannel channel = command.author.getPrivateChannel();
 
 
         if(command.args.length == 0){//Tests to see if args contains anything
 
-            channel.sendMessage("Available Commands:").queue();
+            String message = "Available Commands: \n";
 
-            for(String key : DiscordBot.COMMANDS.keySet()){//Prints the usage info for all possible COMMANDS
-                channel.sendMessage(key).queue();
+            for(CommandManager.commands key : CommandManager.commands.values()){//Prints the usage info for all possible COMMANDS
+                message += key.toString().toLowerCase() + "\n";
             }
+
+            channel.sendMessage(message).queue();
+
         }else{
 
-            if(!DiscordBot.COMMANDS.containsKey(command.args[0])){//Tests to see if the help requested if for a valid command
+            if(CommandManager.commands.valueOf(command.type.toUpperCase()) != null){//Tests to see if the help requested if for a valid command
 
-                throw new MisusedCommandException(command.author.getName() + " gave a bad command");
+                throw new MisusedCommandException(command.author.getName() + " gave bad args for: !help");
 
             }else{
 
-                channel.sendMessage(DiscordBot.COMMANDS.get(command.args[0]).help()).queue();//Sends the help text about the requested command
+                channel.sendMessage(CommandManager.commands.valueOf(command.args[0].toUpperCase()).command.help()).queue();//Sends the help text about the requested command
 
             }
 
@@ -47,13 +68,4 @@ public class HelpCommand extends Command {
 
     }
 
-    /**
-     * Returns the help string for this command
-     *
-     * @return The help string for this command
-     */
-    @Override
-    public String help() {
-        return HELP;
-    }
 }
