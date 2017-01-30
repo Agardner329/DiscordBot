@@ -21,7 +21,11 @@ public class CommandManager {
         JOIN(new JoinGameCommand()),
         LEAVE(new LeaveGameCommand()),
         START(new StartGameCommand()),
-        CANCEL(new CancelGameCommand());
+        CANCEL(new CancelGameCommand()),
+        YES(new YesCommand()),
+        NO(new NoCommand()),
+        PASS(new PassCommand()),
+        FAIL(new FailCommand());
 
         public final Command command;
 
