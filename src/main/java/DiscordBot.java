@@ -4,14 +4,18 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 
-import main.resources.Config;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Created by Alex Gardner on 1/27/2017
  */
 public class DiscordBot {
 
-    private static final String CREDENTIALS = Config.getCredentials();
+    private static final String CREDENTIALS = readConfig().getProperty("Token");
+
+    private static final String configFilePath = "resources/config.properties";
 
     private static JDA bot;
 
@@ -24,7 +28,7 @@ public class DiscordBot {
 
         try{
 
-            bot = new JDABuilder(AccountType.BOT).addListener(new BotListener()).setToken(CREDENTIALS).buildBlocking();
+            bot = new JDABuilder(AccountType.BOT).setToken(CREDENTIALS).addListener(new BotListener()).buildBlocking();
 
             bot.setAutoReconnect(true);
 
@@ -49,6 +53,26 @@ public class DiscordBot {
         String timeString = time.format(new java.util.Date());
 
         System.out.println(timeString + " [" + type + "]: " + message);
+    }
+
+    private static Properties readConfig(){
+
+        Properties prop = new Properties();
+
+        try {
+
+            prop.load(new FileInputStream(configFilePath));
+
+        } catch(IOException e){
+
+            System.out.print("Cannot find configuration file.");
+
+            System.exit(1);
+
+        }
+
+        return prop;
+
     }
 
 }
