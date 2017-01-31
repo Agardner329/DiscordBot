@@ -1,14 +1,13 @@
-package java;
+package main.java;
 
-import java.commands.Command;
-import java.commands.CommandData;
-import java.commands.HelpCommand;
-import java.commands.PingCommand;
+import main.java.commands.gameCommands.*;
+import main.java.commands.Command;
+import main.java.commands.CommandData;
+import main.java.commands.HelpCommand;
+import main.java.commands.PingCommand;
 
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
-
-import java.commands.gameCommands.*;
 
 /**
  * Created by Alex on 1/29/2017.

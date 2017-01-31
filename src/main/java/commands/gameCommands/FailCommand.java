@@ -1,8 +1,8 @@
-package java.commands.gameCommands;
+package main.java.commands.gameCommands;
 
-import java.MisusedCommandException;
-import java.commands.Command;
-import java.commands.CommandData;
+import main.java.commands.Command;
+import main.java.commands.CommandData;
+import main.java.MisusedCommandException;
 
 /**
  * Created by Alex on 1/30/2017.

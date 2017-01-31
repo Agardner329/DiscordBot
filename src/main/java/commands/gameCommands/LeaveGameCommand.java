@@ -1,10 +1,10 @@
-package java.commands.gameCommands;
+package main.java.commands.gameCommands;
 
-import java.GameManager;
-import java.MisusedCommandException;
-import java.commands.Command;
-import java.commands.CommandData;
-import java.ResistanceGame;
+import main.java.GameManager;
+import main.java.MisusedCommandException;
+import main.java.commands.Command;
+import main.java.commands.CommandData;
+import main.java.ResistanceGame;
 
 /**
  * Created by Alex on 1/28/2017.

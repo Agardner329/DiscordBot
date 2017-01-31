@@ -1,6 +1,6 @@
-package java.commands;
+package main.java.commands;
 
-import java.MisusedCommandException;
+import main.java.MisusedCommandException;
 
 /**
  * Created by Alex Gardner on 1/27/2017

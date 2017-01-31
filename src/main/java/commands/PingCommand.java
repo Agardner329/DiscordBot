@@ -1,4 +1,4 @@
-package java.commands;
+package main.java.commands;
 
 
 /**

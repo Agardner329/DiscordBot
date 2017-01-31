@@ -1,4 +1,4 @@
-package java.commands;
+package main.java.commands;
 
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;

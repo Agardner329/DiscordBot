@@ -1,7 +1,7 @@
-package java.commands;
+package main.java.commands;
 
-import java.CommandManager;
-import java.MisusedCommandException;
+import main.java.CommandManager;
+import main.java.MisusedCommandException;
 import net.dv8tion.jda.core.entities.PrivateChannel;
 
 /**
