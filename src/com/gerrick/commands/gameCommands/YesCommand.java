@@ -26,7 +26,7 @@ public class YesCommand extends Command {
 
             command.author.getPrivateChannel().sendMessage("You are not currently in a game.").queue();
 
-        }else if(GameManager.getGameOf(command.author).getCurrentStatus() != ResistanceGame.gameStatus.AWAITING_MISSION_VOTE){
+        }else if(GameManager.getGameOf(command.author).getCurrentStatus() != ResistanceGame.GameStatus.AWAITING_MISSION_VOTE){
 
             command.author.getPrivateChannel().sendMessage("You are not currently in a game.").queue();
 

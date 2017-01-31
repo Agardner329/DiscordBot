@@ -21,7 +21,7 @@ public class LeaveGameCommand extends Command{
     protected void action(CommandData command) throws MisusedCommandException {
 
         try {
-            if (GameManager.getGame(command.channel).removePlayer(command.author) && GameManager.getGame(command.channel).getCurrentStatus().equals(ResistanceGame.gameStatus.WAITING_FOR_PLAYERS)) {
+            if (GameManager.getGame(command.channel).removePlayer(command.author) && GameManager.getGame(command.channel).getCurrentStatus().equals(ResistanceGame.GameStatus.WAITING_FOR_PLAYERS)) {
 
                 command.channel.sendMessage("You have successfully left this game.").queue();
 
