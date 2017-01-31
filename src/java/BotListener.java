@@ -1,4 +1,4 @@
-package com.gerrick;
+package java;
 
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;

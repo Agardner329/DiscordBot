@@ -1,12 +1,14 @@
-package com.gerrick;
+package java;
 
-import com.gerrick.commands.Command;
-import com.gerrick.commands.CommandData;
-import com.gerrick.commands.HelpCommand;
-import com.gerrick.commands.PingCommand;
-import com.gerrick.commands.gameCommands.*;
+import java.commands.Command;
+import java.commands.CommandData;
+import java.commands.HelpCommand;
+import java.commands.PingCommand;
+
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
+
+import java.commands.gameCommands.*;
 
 /**
  * Created by Alex on 1/29/2017.

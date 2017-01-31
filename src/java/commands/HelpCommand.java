@@ -1,8 +1,7 @@
-package com.gerrick.commands;
+package java.commands;
 
-import com.gerrick.CommandManager;
-import com.gerrick.DiscordBot;
-import com.gerrick.MisusedCommandException;
+import java.CommandManager;
+import java.MisusedCommandException;
 import net.dv8tion.jda.core.entities.PrivateChannel;
 
 /**

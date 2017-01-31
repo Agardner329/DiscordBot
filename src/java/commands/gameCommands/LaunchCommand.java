@@ -1,8 +1,8 @@
-package com.gerrick.commands.gameCommands;
+package java.commands.gameCommands;
 
-import com.gerrick.MisusedCommandException;
-import com.gerrick.commands.Command;
-import com.gerrick.commands.CommandData;
+import java.MisusedCommandException;
+import java.commands.Command;
+import java.commands.CommandData;
 
 /**
  * Created by Alex on 1/30/2017.

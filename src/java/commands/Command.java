@@ -1,6 +1,6 @@
-package com.gerrick.commands;
+package java.commands;
 
-import com.gerrick.MisusedCommandException;
+import java.MisusedCommandException;
 
 /**
  * Created by Alex Gardner on 1/27/2017

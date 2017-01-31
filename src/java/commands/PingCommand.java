@@ -1,4 +1,4 @@
-package com.gerrick.commands;
+package java.commands;
 
 
 /**

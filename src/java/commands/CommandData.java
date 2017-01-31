@@ -1,4 +1,4 @@
-package com.gerrick.commands;
+package java.commands;
 
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;

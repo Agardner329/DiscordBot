@@ -1,4 +1,4 @@
-package com.gerrick;
+package java;
 
 /**
  * Created by Alex Gardner on 1/27/2017

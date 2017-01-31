@@ -1,15 +1,15 @@
-package com.gerrick.commands.gameCommands;
+package java.commands.gameCommands;
 
-import com.gerrick.GameManager;
-import com.gerrick.MisusedCommandException;
-import com.gerrick.commands.Command;
-import com.gerrick.commands.CommandData;
-import com.gerrick.ResistanceGame;
+import java.GameManager;
+import java.MisusedCommandException;
+import java.commands.Command;
+import java.commands.CommandData;
+import java.ResistanceGame;
 
 /**
  * Created by Alex on 1/28/2017.
  */
-public class CreateGameCommand extends Command{
+public class CreateGameCommand extends Command {
 
     public CreateGameCommand(){
         this.help = "Usage: !create";
