@@ -9,6 +9,13 @@ import com.gerrick.commands.CommandData;
  */
 public class LaunchCommand extends Command {
 
+    public LaunchCommand(){
+
+        this.help = "Usage: !launch member1 member2 ...";
+        this.canUseThroughServer = true;
+        this.canUseThroughDM = false;
+
+    }
 
     @Override
     protected void action(CommandData command) throws MisusedCommandException, IllegalArgumentException {

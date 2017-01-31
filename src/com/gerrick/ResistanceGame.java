@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class ResistanceGame {
 
-    public enum gameStatus{
+    public enum GameStatus {
         WAITING_FOR_PLAYERS, AWAITING_MISSION, AWAITING_MISSION_VOTE, AWAITING_FLAGS;
     }
 
@@ -68,7 +68,7 @@ public class ResistanceGame {
     private static final String PASS_ICON = "https://i.gyazo.com/817dd13225d03360f66a5c2c688747c9.png";
     private static final String FAIL_ICON = "https://i.gyazo.com/a241757e5cf4c93780576893c87a512f.png";
 
-    private gameStatus currentStatus;
+    private GameStatus currentStatus;
 
     private ArrayList<User> players;
 
@@ -89,7 +89,7 @@ public class ResistanceGame {
 
         players.add(host);
 
-        currentStatus = gameStatus.WAITING_FOR_PLAYERS;
+        currentStatus = GameStatus.WAITING_FOR_PLAYERS;
 
         this.channel = channel;
 
@@ -97,7 +97,7 @@ public class ResistanceGame {
 
     }
 
-    public gameStatus getCurrentStatus(){
+    public GameStatus getCurrentStatus(){
 
         return currentStatus;
 
@@ -147,7 +147,7 @@ public class ResistanceGame {
 
     public void startGame(){
 
-        this.currentStatus = gameStatus.AWAITING_MISSION;
+        this.currentStatus = GameStatus.AWAITING_MISSION;
 
         switch(getNumPlayers()){
 
@@ -180,7 +180,7 @@ public class ResistanceGame {
 
     public void setMission(User[] players){
 
-        this.currentStatus = gameStatus.AWAITING_MISSION_VOTE;
+        this.currentStatus = GameStatus.AWAITING_MISSION_VOTE;
 
         currentMission = players;
 

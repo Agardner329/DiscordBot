@@ -29,7 +29,7 @@ public class JoinGameCommand extends Command{
 
             command.channel.sendMessage(command.author.getName() + " is already in a game").queue();
 
-        }else if(!GameManager.getGame(command.channel).getCurrentStatus().equals(ResistanceGame.gameStatus.WAITING_FOR_PLAYERS)) {
+        }else if(!GameManager.getGame(command.channel).getCurrentStatus().equals(ResistanceGame.GameStatus.WAITING_FOR_PLAYERS)) {
 
             command.channel.sendMessage("The game in this channel is not currently accepting players").queue();
 
