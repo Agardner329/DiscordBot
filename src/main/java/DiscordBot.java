@@ -65,7 +65,7 @@ public class DiscordBot {
 
         } catch(IOException e){
 
-            System.out.print("Cannot find configuration file.");
+            System.out.print("Cannot find config.properties file.");
 
             System.exit(1);
 
