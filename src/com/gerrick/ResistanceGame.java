@@ -14,11 +14,52 @@ public class ResistanceGame {
         WAITING_FOR_PLAYERS, AWAITING_MISSION, AWAITING_MISSION_VOTE, AWAITING_FLAGS;
     }
 
-    private enum roundNumbers{
+    private enum GameSettings{
 
-    }
+        FIVE    (3, 2,  new int[]{2,3,2,3,3},   new int[]{1,1,1,1,1}),
+        SIX     (4, 2,  new int[]{2,3,4,3,4},   new int[]{1,1,1,1,1}),
+        SEVEN   (4, 3,  new int[]{2,3,3,4,4},   new int[]{1,1,1,2,1}),
+        EIGHT   (5, 3,  new int[]{3,4,4,5,5},   new int[]{1,1,1,2,1}),
+        NINE    (6, 3,  new int[]{3,4,4,5,5},   new int[]{1,1,1,2,1}),
+        TEN     (6, 4,  new int[]{3,4,4,5,5},   new int[]{1,1,1,2,1});
 
-    private enum numFactions{
+        private int numResistance;
+        private int numSpies;
+        private int[] numPlayersOnMission;
+        private int[] numSkullsNeeded;
+
+        GameSettings(int numResistance, int numSpies, int[] numPlayersOnMission, int[] numSkullsNeeded){
+
+            this.numSpies = numSpies;
+            this.numResistance = numResistance;
+            this.numPlayersOnMission = numPlayersOnMission;
+            this.numSkullsNeeded = numSkullsNeeded;
+
+        }
+
+        int getNumResistance(){
+
+            return numResistance;
+
+        }
+
+        int getNumSpies(){
+
+            return numSpies;
+
+        }
+
+        int[] getNumPlayersOnMission(){
+
+            return numPlayersOnMission;
+
+        }
+
+        int[] getNumSkullsNeeded(){
+
+            return numSkullsNeeded;
+
+        }
 
     }
 
@@ -33,6 +74,15 @@ public class ResistanceGame {
 
     private TextChannel channel;
 
+    private GameSettings gameSettings;
+
+    private int numMissionsCompleted;
+
+    private User[] spies;
+    private User[] resistance;
+
+    private User[] currentMission;
+
     public ResistanceGame(User host, TextChannel channel){
 
         players = new ArrayList<>();
@@ -42,6 +92,8 @@ public class ResistanceGame {
         currentStatus = gameStatus.WAITING_FOR_PLAYERS;
 
         this.channel = channel;
+
+        this.numMissionsCompleted = 0;
 
     }
 
@@ -57,9 +109,9 @@ public class ResistanceGame {
      * @param player
      */
     public void addPlayer(User player){
-        if(!players.contains(player) && players.size() < 10){
-            players.add(player);
-        }
+
+        players.add(player);
+
     }
 
     /**
@@ -96,6 +148,73 @@ public class ResistanceGame {
     public void startGame(){
 
         this.currentStatus = gameStatus.AWAITING_MISSION;
+
+        switch(getNumPlayers()){
+
+            case 5:
+                this.gameSettings = GameSettings.FIVE;
+                break;
+            case 6:
+                this.gameSettings = GameSettings.SIX;
+                break;
+            case 7:
+                this.gameSettings = GameSettings.SEVEN;
+                break;
+            case 8:
+                this.gameSettings = GameSettings.EIGHT;
+                break;
+            case 9:
+                this.gameSettings = GameSettings.NINE;
+                break;
+            case 10:
+                this.gameSettings = GameSettings.TEN;
+                break;
+
+        }
+
+        spies = new User[gameSettings.numSpies];
+
+
+
+    }
+
+    public void setMission(User[] players){
+
+        this.currentStatus = gameStatus.AWAITING_MISSION_VOTE;
+
+        currentMission = players;
+
+    }
+
+    public void addVote(User player, boolean pass){
+
+
+
+    }
+
+    private void sendMessageToResistance(String message){
+
+        for(User u : resistance){
+
+            sendMessageToPlayer(u, message);
+
+        }
+
+    }
+
+    private void sendMessageToSpies(String message){
+
+        for(User u : spies){
+
+            sendMessageToPlayer(u, message);
+
+        }
+
+    }
+
+    private void sendMessageToPlayer(User player, String message){
+
+        player.getPrivateChannel().sendMessage(message).queue();
 
     }
 
