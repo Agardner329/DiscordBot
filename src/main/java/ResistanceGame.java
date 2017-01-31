@@ -1,8 +1,10 @@
 package main.java;
 
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -23,10 +25,10 @@ public class ResistanceGame {
         NINE    (6, 3,  new int[]{3,4,4,5,5},   new int[]{1,1,1,2,1}),
         TEN     (6, 4,  new int[]{3,4,4,5,5},   new int[]{1,1,1,2,1});
 
-        private int numResistance;
-        private int numSpies;
-        private int[] numPlayersOnMission;
-        private int[] numSkullsNeeded;
+        private final int numResistance;
+        private final int numSpies;
+        private final int[] numPlayersOnMission;
+        private final int[] numSkullsNeeded;
 
         GameSettings(int numResistance, int numSpies, int[] numPlayersOnMission, int[] numSkullsNeeded){
 
@@ -34,30 +36,6 @@ public class ResistanceGame {
             this.numResistance = numResistance;
             this.numPlayersOnMission = numPlayersOnMission;
             this.numSkullsNeeded = numSkullsNeeded;
-
-        }
-
-        int getNumResistance(){
-
-            return numResistance;
-
-        }
-
-        int getNumSpies(){
-
-            return numSpies;
-
-        }
-
-        int[] getNumPlayersOnMission(){
-
-            return numPlayersOnMission;
-
-        }
-
-        int[] getNumSkullsNeeded(){
-
-            return numSkullsNeeded;
 
         }
 
@@ -122,6 +100,12 @@ public class ResistanceGame {
      * @return          If the player was in the list
      */
     public boolean removePlayer(User player){
+
+        if(userIsHost(player) && players.size() != 1){
+
+            sendMessageToGame(player.getName() + " has left the game, " + players.get(1).getName() + " is now the host.");
+
+        }
 
         return players.remove(player);
 
@@ -215,6 +199,12 @@ public class ResistanceGame {
     private void sendMessageToPlayer(User player, String message){
 
         player.getPrivateChannel().sendMessage(message).queue();
+
+    }
+
+    private void sendMessageToGame(String message){
+
+        channel.sendMessage(message).queue();
 
     }
 

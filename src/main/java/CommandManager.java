@@ -79,6 +79,7 @@ public class CommandManager {
             String error = command.author.getName() + " gave a bad command: !" + command.type;
 
             DiscordBot.log("Command Error", error);
+
         }catch(MisusedCommandException e){//Prints out the specifics of the error to the log
 
             DiscordBot.log("Command Error", e.getMessage());
