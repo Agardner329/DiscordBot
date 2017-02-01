@@ -49,7 +49,8 @@ public class ResistanceGame {
 
     private GameStatus currentStatus;
 
-    private ArrayList<User> players;
+    private User[] players;
+    private ArrayList<User> playerQueue;
 
     private TextChannel channel;
 
@@ -65,9 +66,9 @@ public class ResistanceGame {
 
     public ResistanceGame(User host, TextChannel channel){
 
-        players = new ArrayList<>();
+        playerQueue = new ArrayList<>();
 
-        players.add(host);
+        playerQueue.add(host);
 
         currentStatus = GameStatus.WAITING_FOR_PLAYERS;
 
@@ -96,7 +97,7 @@ public class ResistanceGame {
      */
     public void addPlayer(User player){
 
-        players.add(player);
+        playerQueue.add(player);
 
     }
 
@@ -109,31 +110,31 @@ public class ResistanceGame {
      */
     public boolean removePlayer(User player){
 
-        if(userIsHost(player) && players.size() != 1){
+        if(userIsHost(player) && playerQueue.size() != 1){
 
-            sendMessageToGame(player.getName() + " has left the game, " + players.get(1).getName() + " is now the host.");
+            sendMessageToGame(player.getName() + " has left the game, " + playerQueue.get(1).getName() + " is now the host.");
 
         }
 
-        return players.remove(player);
+        return playerQueue.remove(player);
 
     }
 
     public boolean hasPlayer(User player){
 
-        return players.contains(player);
+        return playerQueue.contains(player);
 
     }
 
     public boolean userIsHost(User player){
 
-        return players.get(0).equals(player);
+        return playerQueue.get(0).equals(player);
 
     }
 
     public int getNumPlayers(){
 
-        return players.size();
+        return playerQueue.size();
 
     }
 
@@ -164,26 +165,27 @@ public class ResistanceGame {
 
         }
 
-        this.spies = new User[gameSettings.numSpies];
-        this.resistance = new User[gameSettings.numResistance];
-
-        this.setRoles(this.players, gameSettings.numSpies);
-
-
-
-
+        this.setRoles();
 
     }
 
-    private void setRoles(ArrayList<User> players, int numSpies) {
-        ArrayList<User> remainingPlayers = new ArrayList<>(players);
-        for (int i = 0; i < numSpies; i++) {
+    private void setRoles() {
+
+        this.players = this.playerQueue.toArray(new User[this.playerQueue.size()]);
+
+        ArrayList<User> remainingPlayers = new ArrayList<>(this.playerQueue);
+
+        this.spies = new User[this.gameSettings.numSpies];
+
+        for (int i = 0; i < this.gameSettings.numSpies; i++) {
+
             int spy = (int) (Math.random() * remainingPlayers.size());
             this.spies[i] = remainingPlayers.remove(spy);
+
         }
-        for (int i = 0; i < remainingPlayers.size(); i++) {
-            this.resistance[i] = remainingPlayers.get(i);
-        }
+
+        this.resistance = remainingPlayers.toArray(new User[this.gameSettings.numResistance]);
+
     }
 
     private void nextRound() {
