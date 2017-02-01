@@ -230,7 +230,7 @@ public class ResistanceGame {
 
         this.voteTally.put(player, vote);
 
-        if (this.voteTally.keySet().size() == this.players.length) {
+        if (this.voteTally.size() == this.players.length) {
             this.runMission();
         }
 
@@ -250,7 +250,24 @@ public class ResistanceGame {
             e.printStackTrace();
         }
 
-        GameMessages.sendMissionIntro(this.channel, this.currentMission);
+        if (this.voteResult(this.voteTally)) {
+            GameMessages.sendMissionIntro(this.channel, this.currentMission);
+        } else {
+            this.nextRound();
+        }
+
+    }
+
+    private boolean voteResult(HashMap<User, Boolean> votes) {
+
+        int passVotes = 0;
+        for (User player : this.players) {
+
+            passVotes += (votes.get(player) ? 1 : 0);
+
+        }
+
+        return passVotes > (this.players.length / 2);
 
     }
 
@@ -258,6 +275,45 @@ public class ResistanceGame {
 
         this.missionResult.put(player, result);
 
+        if (this.missionResult.size() == this.numPlayersThisMission()) {
+            this.completeMission();
+        }
+
     }
+
+    private void completeMission() {
+
+        int numFails = 0;
+
+        for (User player : this.missionResult.keySet()) {
+
+            numFails += (this.missionResult.get(player) ? 0 : 1);
+
+        }
+
+        if (numFails <= this.gameSettings.numSkullsNeeded[this.numMissionsCompleted]) {
+
+            this.missionSucceeded(this.numPlayersThisMission() - numFails, numFails);
+
+        } else {
+
+            this.missionFailed(this.numPlayersThisMission() - numFails, numFails);
+
+        }
+
+    }
+
+    private void missionSucceeded(int passes, int fails) {
+
+        GameMessages.sendMissionSuccess(this.channel, passes, fails);
+
+    }
+
+    private void missionFailed(int passes, int fails) {
+
+        GameMessages.sendMissionFailure(this.channel, passes, fails);
+
+    }
+
 
 }
