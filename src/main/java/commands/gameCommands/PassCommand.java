@@ -18,8 +18,7 @@ public class PassCommand extends Command {
 
     @Override
     protected void action(CommandData command) throws MisusedCommandException, IllegalArgumentException {
-
-
+        
         if(!GameManager.playerIsInGame(command.author)){
 
             command.author.getPrivateChannel().sendMessage("You are not currently in a game").queue();
