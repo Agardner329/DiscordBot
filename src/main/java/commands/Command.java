@@ -18,11 +18,11 @@ public abstract class Command {
 
         if(command.isFromPublic){
             if(!canUseThroughServer){
-                throw new MisusedCommandException(command.author.getName() + " tried to use " + this.getClass().getSimpleName() + " from a public channel.");
+                throw new MisusedCommandException();
             }
         }else{
             if(!canUseThroughDM){
-                throw new MisusedCommandException(command.author.getName() + " tried to use " + this.getClass().getSimpleName() + " from a private channel.");
+                throw new MisusedCommandException();
             }
         }
 

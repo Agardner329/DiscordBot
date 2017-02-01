@@ -52,7 +52,7 @@ public class HelpCommand extends Command {
 
             if(CommandManager.commands.valueOf(command.type.toUpperCase()) != null){//Tests to see if the help requested if for a valid command
 
-                throw new MisusedCommandException(command.author.getName() + " gave bad args for: !help");
+                throw new MisusedCommandException();
 
             }else{
 

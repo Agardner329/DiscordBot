@@ -38,6 +38,8 @@ public class BotListener extends ListenerAdapter{
     @Override
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent event){
 
+        if(event.getAuthor().getId().equals(event.getJDA().getSelfUser().getId()));
+
         //Check that message is command
         if(event.getMessage().getContent().substring(0, 1).equals("!")){
 

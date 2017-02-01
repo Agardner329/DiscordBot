@@ -21,15 +21,15 @@ public class YesCommand extends Command {
 
         if(!GameManager.playerIsInGame(command.author)){
 
-            command.author.getPrivateChannel().sendMessage("You are not currently in a game.").queue();
+            command.author.getPrivateChannel().sendMessage("You are not currently in a game").queue();
 
         }else if(GameManager.getGameOf(command.author).getCurrentStatus() != ResistanceGame.GameStatus.AWAITING_MISSION_VOTE){
 
-            command.author.getPrivateChannel().sendMessage("You are not currently in a game.").queue();
+            command.author.getPrivateChannel().sendMessage("Your game is not currently waiting for a mission vote").queue();
 
         }else{
 
-
+            GameManager.getGameOf(command.author).addVote(command.author, true);
 
         }
 

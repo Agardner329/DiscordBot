@@ -270,6 +270,16 @@ class GameMessages {
 
         try {
 
+            player.openPrivateChannel().queue();
+
+            try {
+                Thread.sleep(100);
+            } catch(InterruptedException e){
+
+                e.printStackTrace();
+
+            }
+
             player.getPrivateChannel().sendFile(file, null).queue();
 
         } catch (IOException e){
