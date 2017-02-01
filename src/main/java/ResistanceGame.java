@@ -59,6 +59,7 @@ public class ResistanceGame {
     private User[] spies;
     private User[] resistance;
 
+    private User commander;
     private User[] currentMission;
 
     public ResistanceGame(User host, TextChannel channel){
@@ -156,9 +157,29 @@ public class ResistanceGame {
 
         }
 
-        spies = new User[gameSettings.numSpies];
+        this.spies = new User[gameSettings.numSpies];
+        this.resistance = new User[gameSettings.numResistance];
+
+        this.setRoles(this.players, gameSettings.numSpies);
 
 
+
+
+
+    }
+
+    private void setRoles(ArrayList<User> players, int numSpies) {
+        ArrayList<User> remainingPlayers = new ArrayList<>(players);
+        for (int i = 0; i < numSpies; i++) {
+            int spy = (int) (Math.random() * remainingPlayers.size());
+            this.spies[i] = remainingPlayers.remove(spy);
+        }
+        for (int i = 0; i < remainingPlayers.size(); i++) {
+            this.resistance[i] = remainingPlayers.get(i);
+        }
+    }
+
+    private void nextRound() {
 
     }
 
