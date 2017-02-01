@@ -4,7 +4,7 @@ import main.java.GameManager;
 import main.java.game.ResistanceGame;
 import main.java.commands.Command;
 import main.java.commands.CommandData;
-import main.java.MisusedCommandException;
+import main.java.exceptions.MisusedCommandException;
 
 public class JoinGameCommand extends Command {
 

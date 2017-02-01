@@ -6,6 +6,7 @@ import main.java.commands.CommandData;
 import main.java.commands.HelpCommand;
 import main.java.commands.PingCommand;
 
+import main.java.exceptions.MisusedCommandException;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 

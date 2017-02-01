@@ -1,6 +1,6 @@
 package main.java.commands;
 
-import main.java.MisusedCommandException;
+import main.java.exceptions.MisusedCommandException;
 
 public abstract class Command {
 

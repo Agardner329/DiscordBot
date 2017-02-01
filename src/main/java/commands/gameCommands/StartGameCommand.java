@@ -1,7 +1,7 @@
 package main.java.commands.gameCommands;
 
 import main.java.GameManager;
-import main.java.MisusedCommandException;
+import main.java.exceptions.MisusedCommandException;
 import main.java.commands.Command;
 import main.java.commands.CommandData;
 

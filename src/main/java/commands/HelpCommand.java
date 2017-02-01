@@ -1,7 +1,7 @@
 package main.java.commands;
 
 import main.java.CommandManager;
-import main.java.MisusedCommandException;
+import main.java.exceptions.MisusedCommandException;
 import net.dv8tion.jda.core.entities.PrivateChannel;
 
 public class HelpCommand extends Command {
