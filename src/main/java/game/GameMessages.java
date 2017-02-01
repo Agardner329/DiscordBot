@@ -156,7 +156,7 @@ class GameMessages {
 
     }
 
-    private static void sendMessageToGame(TextChannel channel, String message){
+    protected static void sendMessageToGame(TextChannel channel, String message){
 
         channel.sendMessage(message).queue();
 
