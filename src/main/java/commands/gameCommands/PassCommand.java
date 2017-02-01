@@ -34,6 +34,8 @@ public class PassCommand extends Command {
         }else{
 
             GameManager.getGameOf(command.author).addMissionResult(command.author, true);
+            command.author.getPrivateChannel().sendMessage("You have attempted to pass the mission").queue();
+
 
         }
 

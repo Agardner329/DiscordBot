@@ -39,6 +39,7 @@ public class FailCommand extends Command {
         }else{
 
             GameManager.getGameOf(command.author).addMissionResult(command.author, false);
+            command.author.getPrivateChannel().sendMessage("You have attempted to fail the mission").queue();
 
         }
 
