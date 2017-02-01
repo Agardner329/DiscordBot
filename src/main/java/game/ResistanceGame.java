@@ -4,6 +4,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Alex on 1/27/2017.
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class ResistanceGame {
 
     public enum GameStatus {
-        WAITING_FOR_PLAYERS, AWAITING_MISSION, AWAITING_MISSION_VOTE, AWAITING_FLAGS;
+        AWAITING_PLAYERS, AWAITING_MISSION, AWAITING_MISSION_VOTE, AWAITING_MISSION_RESULT;
     }
 
     private enum GameSettings{
@@ -54,9 +55,11 @@ public class ResistanceGame {
     private User[] resistance;
 
     private User commander;
-    private int commanderIndex;
+    private int nextCommander;
 
     private User[] currentMission;
+    private HashMap<User, Boolean> voteTally;
+    private HashMap<User, Boolean> missionResult;
 
     public ResistanceGame(User host, TextChannel channel){
 
@@ -64,7 +67,7 @@ public class ResistanceGame {
 
         playerQueue.add(host);
 
-        currentStatus = GameStatus.WAITING_FOR_PLAYERS;
+        currentStatus = GameStatus.AWAITING_PLAYERS;
 
         this.channel = channel;
 
@@ -138,6 +141,18 @@ public class ResistanceGame {
 
     }
 
+    public boolean onCurrentMission(User player) {
+
+        for (User other : this.players) {
+            if (player == other) {
+                return true;
+            }
+        }
+
+        return false
+
+    }
+
     public void startGame(){
 
         switch(getNumPlayers()){
@@ -171,7 +186,7 @@ public class ResistanceGame {
 
         int numPlayers = this.getNumPlayers();
 
-        this.commanderIndex = (int) (Math.random() * numPlayers);
+        this.nextCommander = (int) (Math.random() * numPlayers);
 
         this.players = this.playerQueue.toArray(new User[numPlayers]);
 
@@ -194,9 +209,11 @@ public class ResistanceGame {
 
         this.currentStatus = GameStatus.AWAITING_MISSION;
 
-        this.commander = this.players[this.commanderIndex];
-        this.commanderIndex = (this.commanderIndex + 1) % this.players.length;
+        this.commander = this.players[this.nextCommander];
+        this.nextCommander = (this.nextCommander + 1) % this.players.length;
         this.currentMission = new User[this.numPlayersThisMission()];
+
+        this.voteTally = new HashMap<>();
 
         GameMessages.sendNewRoundMessage(this.channel, this.commander, this.numPlayersThisMission());
 
@@ -209,7 +226,29 @@ public class ResistanceGame {
 
     }
 
-    public void addVote(User player, boolean pass){
+    public void addVote(User player, boolean vote) {
+
+        this.voteTally.put(player, vote);
+
+        if (this.voteTally.keySet().size() == this.players.length) {
+            this.runMission();
+        }
+
+    }
+
+    private void runMission() throws InterruptedException {
+
+        this.currentStatus = GameStatus.AWAITING_MISSION_RESULT;
+
+        this.
+
+        GameMessages.sendVoteResults(this.channel, this.voteTally);
+        Thread.sleep(5000);
+        GameMessages.sendMissionIntro(this.channel, this.currentMission);
+
+    }
+
+    public void addMissionResult(User player, boolean result) {
 
 
 
