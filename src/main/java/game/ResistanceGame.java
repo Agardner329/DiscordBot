@@ -1,12 +1,8 @@
 package main.java.game;
 
-import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.entities.impl.MessageImpl;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
-import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -60,7 +56,7 @@ public class ResistanceGame {
     private User commander;
     private int commanderIndex;
 
-    private ArrayList<User> currentMission;
+    private User[] currentMission;
 
     public ResistanceGame(User host, TextChannel channel){
 
@@ -124,15 +120,25 @@ public class ResistanceGame {
 
     }
 
+    public User getCommander() {
+
+        return this.commander;
+
+    }
+
     public int getNumPlayers(){
 
         return playerQueue.size();
 
     }
 
-    public void startGame(){
+    public int numPlayersThisMission() {
 
-        this.currentStatus = GameStatus.AWAITING_MISSION;
+        return this.gameSettings.numPlayersOnMission[this.numMissionsCompleted];
+
+    }
+
+    public void startGame(){
 
         switch(getNumPlayers()){
 
@@ -186,18 +192,22 @@ public class ResistanceGame {
 
     private void nextRound() {
 
-        this.commanderIndex = (this.commanderIndex + 1) % this.players.length;
+        this.currentStatus = GameStatus.AWAITING_MISSION;
+
         this.commander = this.players[this.commanderIndex];
+        this.commanderIndex = (this.commanderIndex + 1) % this.players.length;
+        this.currentMission = new User[this.numPlayersThisMission()];
+
+        GameMessages.sendNewRoundMessage(this.channel, this.commander, this.numPlayersThisMission());
 
     }
 
-//    public void setMission(User[] players){
-//
-//        this.currentStatus = GameStatus.AWAITING_MISSION_VOTE;
-//
-//        currentMission = players;
-//
-//    }
+    public void pushToVote(User[] members) {
+
+        this.currentMission = members;
+        this.currentStatus = GameStatus.AWAITING_MISSION_VOTE;
+
+    }
 
     public void addVote(User player, boolean pass){
 
