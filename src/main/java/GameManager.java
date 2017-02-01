@@ -6,9 +6,6 @@ import net.dv8tion.jda.core.entities.User;
 
 import java.util.HashMap;
 
-/**
- * Created by Alex on 1/29/2017.
- */
 public class GameManager {
 
     private static HashMap<TextChannel, ResistanceGame> GAMES = new HashMap<>();

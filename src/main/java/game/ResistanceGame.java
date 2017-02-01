@@ -6,9 +6,6 @@ import net.dv8tion.jda.core.entities.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Alex on 1/27/2017.
- */
 public class ResistanceGame {
 
     public enum GameStatus {
@@ -311,7 +308,7 @@ public class ResistanceGame {
 
     private void missionFailed(int passes, int fails) {
 
-        GameMessages.sendMissionFailure(this.channel, passes, fails);
+        GameMessages.sendMissionFail(this.channel, passes, fails);
 
     }
 

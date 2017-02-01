@@ -6,9 +6,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 
-/**
- * Created by Alex Gardner on 1/27/2017
- */
 public class CommandData {
 
     //If the message was received from a public channel

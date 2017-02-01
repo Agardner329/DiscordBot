@@ -5,9 +5,6 @@ import main.java.MisusedCommandException;
 import main.java.commands.Command;
 import main.java.commands.CommandData;
 
-/**
- * Created by Alex on 1/28/2017.
- */
 public class StartGameCommand extends Command {
 
     public StartGameCommand(){

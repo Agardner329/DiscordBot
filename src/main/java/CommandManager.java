@@ -9,9 +9,6 @@ import main.java.commands.PingCommand;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 
-/**
- * Created by Alex on 1/29/2017.
- */
 public class CommandManager {
 
     public enum commands {

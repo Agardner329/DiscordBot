@@ -5,9 +5,6 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-/**
- * Created by Alex Gardner on 1/27/2017
- */
 public class BotListener extends ListenerAdapter{
 
     /**

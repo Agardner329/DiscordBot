@@ -2,9 +2,6 @@ package main.java.commands;
 
 import main.java.MisusedCommandException;
 
-/**
- * Created by Alex Gardner on 1/27/2017
- */
 public abstract class Command {
 
     protected String help;

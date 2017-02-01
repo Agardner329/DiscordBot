@@ -4,9 +4,6 @@ import main.java.CommandManager;
 import main.java.MisusedCommandException;
 import net.dv8tion.jda.core.entities.PrivateChannel;
 
-/**
- * Created by Alex Gardner on 1/27/2017
- */
 public class HelpCommand extends Command {
 
     public HelpCommand(){

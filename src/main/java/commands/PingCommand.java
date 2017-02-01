@@ -1,9 +1,5 @@
 package main.java.commands;
 
-
-/**
- * Created by Alex Gardner on 1/27/2017
- */
 public class PingCommand extends Command {
 
     public PingCommand(){

@@ -6,9 +6,6 @@ import main.java.game.ResistanceGame;
 import main.java.commands.Command;
 import main.java.commands.CommandData;
 
-/**
- * Created by Alex on 1/30/2017.
- */
 public class YesCommand extends Command {
 
     public YesCommand(){

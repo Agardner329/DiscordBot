@@ -6,9 +6,6 @@ import main.java.commands.Command;
 import main.java.commands.CommandData;
 import main.java.MisusedCommandException;
 
-/**
- * Created by Alex on 1/28/2017.
- */
 public class JoinGameCommand extends Command {
 
     public JoinGameCommand(){

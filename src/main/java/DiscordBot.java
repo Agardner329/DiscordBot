@@ -8,9 +8,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * Created by Alex Gardner on 1/27/2017
- */
 public class DiscordBot {
 
     private static final String CREDENTIALS = readConfig().getProperty("Token");

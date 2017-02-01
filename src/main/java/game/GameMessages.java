@@ -10,9 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-/**
- * Created by Alex Gardner on 1/31/2017.
- */
 class GameMessages {
 
     private static final File SPY = new File("resources/images/Spy.png");
