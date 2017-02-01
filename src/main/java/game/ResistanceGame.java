@@ -296,8 +296,6 @@ public class ResistanceGame {
 
     private void runMission() {
 
-        this.currentStatus = GameStatus.AWAITING_MISSION_RESULT;
-
         this.missionResult = new HashMap<>();
 
         GameMessages.sendVoteResults(this.channel, this.voteTally);
@@ -309,7 +307,8 @@ public class ResistanceGame {
         }
 
         if (this.voteResult(this.voteTally)) {
-            GameMessages.sendMissionIntro(this.channel, this.currentMission);
+//            GameMessages.sendMissionIntro(this.channel, this.currentMission);
+            this.currentStatus = GameStatus.AWAITING_MISSION_RESULT;
         } else {
             this.nextRound();
         }
@@ -349,7 +348,7 @@ public class ResistanceGame {
 
         }
 
-        if (numFails <= this.gameSettings.numSkullsNeeded[this.numMissionsCompleted]) {
+        if (numFails < this.gameSettings.numSkullsNeeded[this.numMissionsCompleted]) {
 
             this.missionSucceeded(this.getNumPlayersThisMission() - numFails, numFails);
 
@@ -376,6 +375,8 @@ public class ResistanceGame {
         this.numSuccesses++;
         if (numSuccesses == 3) {
             this.resistanceWin();
+        } else {
+            this.nextRound();
         }
 
     }
@@ -394,6 +395,8 @@ public class ResistanceGame {
         this.numFailures++;
         if (numFailures == 3) {
             this.spiesWin();
+        } else {
+            this.nextRound();
         }
 
     }

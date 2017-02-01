@@ -29,7 +29,7 @@ public class LaunchCommand extends Command {
 
             command.channel.sendMessage("Your game is not currently waiting for a mission").queue();
 
-        }else if(GameManager.getGameOf(command.author).getCommander().equals(command.author)){
+        }else if(!GameManager.getGameOf(command.author).getCommander().equals(command.author)){
 
             command.channel.sendMessage("You are not the current commander").queue();
 

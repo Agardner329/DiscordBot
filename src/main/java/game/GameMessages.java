@@ -151,7 +151,7 @@ class GameMessages {
 
         }
 
-        sendMessageToGame(channel, "The mission passes with flag count: " + numPass + " passes, and " + numFail + "fails");
+        sendMessageToGame(channel, "The mission passes with flag count: " + numPass + " passes, and " + numFail + " fails");
 
     }
 
@@ -190,7 +190,7 @@ class GameMessages {
 
         }
 
-        sendMessageToGame(channel, "The mission fails with flag count: " + numPass + " passes, and " + numFail + "fails");
+        sendMessageToGame(channel, "The mission fails with flag count: " + numPass + " passes, and " + numFail + " fails");
 
     }
 
@@ -256,13 +256,13 @@ class GameMessages {
 
     static void sendResistanceWinMessage(TextChannel channel, int totalMissions) {
 
-        sendMessageToGame(channel, "Resistance wins with a score of 3 to " + (5 - totalMissions) + "!");
+        sendMessageToGame(channel, "Resistance wins with a score of 3 to " + (totalMissions - 3) + "!");
 
     }
 
     static void sendSpiesWinMessage(TextChannel channel, int totalMissions) {
 
-        sendMessageToGame(channel, "Spies win with a score of 3 to " + (5 - totalMissions) + "!");
+        sendMessageToGame(channel, "Spies win with a score of 3 to " + (totalMissions - 3) + "!");
 
     }
 

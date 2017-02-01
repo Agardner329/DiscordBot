@@ -28,11 +28,11 @@ public class FailCommand extends Command {
 
             command.author.getPrivateChannel().sendMessage("Your game is not currently waiting for mission flags").queue();
 
-        }else if(GameManager.getGameOf(command.author).isOnCurrentMission(command.author)){
+        }else if(!GameManager.getGameOf(command.author).isOnCurrentMission(command.author)){
 
             command.author.getPrivateChannel().sendMessage("You are not on the current mission").queue();
 
-        }else if(GameManager.getGameOf(command.author).playerIsSpy(command.author)) {
+        }else if(!GameManager.getGameOf(command.author).playerIsSpy(command.author)) {
 
             command.author.getPrivateChannel().sendMessage("You are not a spy!").queue();
 
