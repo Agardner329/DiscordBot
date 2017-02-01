@@ -149,7 +149,7 @@ public class ResistanceGame {
             }
         }
 
-        return false
+        return false;
 
     }
 
@@ -236,21 +236,27 @@ public class ResistanceGame {
 
     }
 
-    private void runMission() throws InterruptedException {
+    private void runMission() {
 
         this.currentStatus = GameStatus.AWAITING_MISSION_RESULT;
 
-        this.
+        this.missionResult = new HashMap<>();
 
         GameMessages.sendVoteResults(this.channel, this.voteTally);
-        Thread.sleep(5000);
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         GameMessages.sendMissionIntro(this.channel, this.currentMission);
 
     }
 
     public void addMissionResult(User player, boolean result) {
 
-
+        this.missionResult.put(player, result);
 
     }
 
