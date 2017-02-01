@@ -3,6 +3,7 @@ package main.java;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.impl.MessageImpl;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 import java.io.*;
@@ -76,11 +77,7 @@ public class ResistanceGame {
 
         this.numMissionsCompleted = 0;
 
-        try {
-            sendImageToPlayer(host, new FileInputStream(new File("shit.png")));
-        } catch(FileNotFoundException e){
-
-        }
+        sendImageToGame(new File("shit.png"));
 
     }
 
@@ -238,33 +235,26 @@ public class ResistanceGame {
 
     }
 
-    private void sendImageToPlayer(User player, FileInputStream file){
+    private void sendImageToPlayer(User player, File file){
 
         try {
 
-            player.getPrivateChannel().sendFile(file, "", player.getPrivateChannel().sendMessage("Fuck off!").block());
+            player.getPrivateChannel().sendFile(file, null).queue();
 
-        } catch(RateLimitedException e){
-
-            e.printStackTrace();
-            System.exit(0);
+        } catch (IOException e){
 
         }
 
 
     }
 
-    private void sendImageToGame(FileInputStream file){
-
+    private void sendImageToGame(File file){
 
         try {
 
-            channel.sendFile(file, "Woop", channel.sendMessage("Fuck off!").block());
+            channel.sendFile(file, null).queue();
 
-        } catch(RateLimitedException e){
-
-            e.printStackTrace();
-            System.exit(0);
+        } catch (IOException e){
 
         }
 
