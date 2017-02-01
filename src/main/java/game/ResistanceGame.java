@@ -151,7 +151,7 @@ public class ResistanceGame {
 
         for(User u : players){
 
-            if(u.getName().toLowerCase() == playerName.toLowerCase()){
+            if(u.getName().toLowerCase().equals(playerName.toLowerCase())){
 
                 return u;
 
