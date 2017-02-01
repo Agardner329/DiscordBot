@@ -24,7 +24,79 @@ class GameMessages {
 
     protected static void sendVoteResults(TextChannel channel, HashMap<User, Boolean> votes){
 
+        BufferedImage resultImage = new BufferedImage(816 * votes.size(), 1110, BufferedImage.TYPE_INT_RGB);
+        Graphics g = resultImage.getGraphics();
+        int currentX = 0;
 
+        int numYes = 0;
+        int numNo = 0;
+
+        try {
+            for (Boolean vote : votes.values()) {
+
+                if(vote){
+
+                    numYes++;
+                    g.drawImage(ImageIO.read(YES), currentX, 0, null);
+
+                }else{
+
+                    numNo++;
+                    g.drawImage(ImageIO.read(NO), currentX, 0, null);
+
+                }
+
+                currentX += 816;
+
+            }
+
+            File tempFile = new File("temp.png");
+
+            ImageIO.write(resultImage, "png", tempFile);
+
+            sendImageToGame(channel, tempFile);
+
+            tempFile.delete();
+
+        }catch (IOException e){
+
+            e.printStackTrace();
+
+        }
+
+        String message = "";
+
+        if(numNo > numYes){
+
+            message += "The mission proposal fails!\n";
+
+        }else{
+
+            message += "The mission proposal passes!\n";
+
+        }
+
+        message += "The votes for this mission were:\n";
+
+        for(User u : votes.keySet()){
+
+            message += u.getName() + ": ";
+
+            if(votes.get(u)){
+
+                message += "yes";
+
+            }else{
+
+                message += "no";
+
+            }
+
+            message += "\n";
+
+        }
+
+        sendMessageToGame(channel, message);
 
     }
 
