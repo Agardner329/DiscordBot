@@ -1,5 +1,6 @@
 package main.java.game;
 
+import main.java.exceptions.PlayerNotFoundException;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 
@@ -9,7 +10,7 @@ import java.util.HashMap;
 public class ResistanceGame {
 
     public enum GameStatus {
-        AWAITING_PLAYERS, AWAITING_MISSION, AWAITING_MISSION_VOTE, AWAITING_MISSION_RESULT;
+        AWAITING_PLAYERS, AWAITING_MISSION, AWAITING_MISSION_VOTE, AWAITING_MISSION_RESULT
     }
 
     private enum GameSettings{
@@ -78,11 +79,6 @@ public class ResistanceGame {
 
     }
 
-    /**
-     * Adds a player to the list of players
-     *
-     * @param player
-     */
     public void addPlayer(User player){
 
         playerQueue.add(player);
@@ -114,6 +110,38 @@ public class ResistanceGame {
 
     }
 
+    public boolean hasPlayer(String playerName){
+
+        for(User u : players){
+
+            if(u.getName().toLowerCase().equals(playerName.toLowerCase())){
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+
+    public User getPlayer(String playerName) throws PlayerNotFoundException{
+
+        for(User u : players){
+
+            if(u.getName().toLowerCase() == playerName.toLowerCase()){
+
+                return u;
+
+            }
+
+        }
+
+        throw new PlayerNotFoundException();
+
+    }
+
     public boolean userIsHost(User player){
 
         return playerQueue.get(0).equals(player);
@@ -132,13 +160,13 @@ public class ResistanceGame {
 
     }
 
-    public int numPlayersThisMission() {
+    public int getNumPlayersThisMission() {
 
         return this.gameSettings.numPlayersOnMission[this.numMissionsCompleted];
 
     }
 
-    public boolean onCurrentMission(User player) {
+    public boolean isOnCurrentMission(User player) {
 
         for (User other : this.players) {
             if (player == other) {
@@ -200,6 +228,9 @@ public class ResistanceGame {
 
         this.resistance = remainingPlayers.toArray(new User[this.gameSettings.numResistance]);
 
+        GameMessages.sendSpyIntro(this.spies);
+        GameMessages.sendResistanceIntro(this.resistance);
+
     }
 
     private void nextRound() {
@@ -208,11 +239,11 @@ public class ResistanceGame {
 
         this.commander = this.players[this.nextCommander];
         this.nextCommander = (this.nextCommander + 1) % this.players.length;
-        this.currentMission = new User[this.numPlayersThisMission()];
+        this.currentMission = new User[this.getNumPlayersThisMission()];
 
         this.voteTally = new HashMap<>();
 
-        GameMessages.sendNewRoundMessage(this.channel, this.commander, this.numPlayersThisMission());
+        GameMessages.sendNewRoundMessage(this.channel, this.commander, this.getNumPlayersThisMission());
 
     }
 
@@ -272,7 +303,7 @@ public class ResistanceGame {
 
         this.missionResult.put(player, result);
 
-        if (this.missionResult.size() == this.numPlayersThisMission()) {
+        if (this.missionResult.size() == this.getNumPlayersThisMission()) {
             this.completeMission();
         }
 
@@ -290,11 +321,11 @@ public class ResistanceGame {
 
         if (numFails <= this.gameSettings.numSkullsNeeded[this.numMissionsCompleted]) {
 
-            this.missionSucceeded(this.numPlayersThisMission() - numFails, numFails);
+            this.missionSucceeded(this.getNumPlayersThisMission() - numFails, numFails);
 
         } else {
 
-            this.missionFailed(this.numPlayersThisMission() - numFails, numFails);
+            this.missionFailed(this.getNumPlayersThisMission() - numFails, numFails);
 
         }
 
