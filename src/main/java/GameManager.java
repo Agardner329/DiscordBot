@@ -1,5 +1,6 @@
 package main.java;
 
+import main.java.game.ResistanceGame;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 

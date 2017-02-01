@@ -2,7 +2,7 @@ package main.java.commands.gameCommands;
 
 import main.java.GameManager;
 import main.java.MisusedCommandException;
-import main.java.ResistanceGame;
+import main.java.game.ResistanceGame;
 import main.java.commands.Command;
 import main.java.commands.CommandData;
 

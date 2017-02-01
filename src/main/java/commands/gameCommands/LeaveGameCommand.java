@@ -4,7 +4,7 @@ import main.java.GameManager;
 import main.java.MisusedCommandException;
 import main.java.commands.Command;
 import main.java.commands.CommandData;
-import main.java.ResistanceGame;
+import main.java.game.ResistanceGame;
 
 /**
  * Created by Alex on 1/28/2017.

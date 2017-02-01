@@ -1,4 +1,4 @@
-package main.java;
+package main.java.game;
 
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -43,11 +43,6 @@ public class ResistanceGame {
 
     }
 
-    private static final String SPY_ICON = "https://i.gyazo.com/b6beda8a8045e9d933ebdd1323d45690.png";
-    private static final String TOWN_ICON = "https://i.gyazo.com/a944cefaf424b9838630b7ee34d88c31.png";
-    private static final String PASS_ICON = "https://i.gyazo.com/817dd13225d03360f66a5c2c688747c9.png";
-    private static final String FAIL_ICON = "https://i.gyazo.com/a241757e5cf4c93780576893c87a512f.png";
-
     private GameStatus currentStatus;
 
     private User[] players;
@@ -76,8 +71,6 @@ public class ResistanceGame {
         this.channel = channel;
 
         this.numMissionsCompleted = 0;
-
-        sendImageToGame(new File("shit.png"));
 
     }
 
@@ -109,7 +102,7 @@ public class ResistanceGame {
 
         if(userIsHost(player) && playerQueue.size() != 1){
 
-            sendMessageToGame(player.getName() + " has left the game, " + playerQueue.get(1).getName() + " is now the host.");
+            GameMessages.sendMessageToGame(this.channel, player.getName() + " has left the game, " + playerQueue.get(1).getName() + " is now the host.");
 
         }
 
@@ -200,63 +193,6 @@ public class ResistanceGame {
     public void addVote(User player, boolean pass){
 
 
-
-    }
-
-    private void sendMessageToResistance(String message){
-
-        for(User u : resistance){
-
-            sendMessageToPlayer(u, message);
-
-        }
-
-    }
-
-    private void sendMessageToSpies(String message){
-
-        for(User u : spies){
-
-            sendMessageToPlayer(u, message);
-
-        }
-
-    }
-
-    private void sendMessageToPlayer(User player, String message){
-
-        player.getPrivateChannel().sendMessage(message).queue();
-
-    }
-
-    private void sendMessageToGame(String message){
-
-        channel.sendMessage(message).queue();
-
-    }
-
-    private void sendImageToPlayer(User player, File file){
-
-        try {
-
-            player.getPrivateChannel().sendFile(file, null).queue();
-
-        } catch (IOException e){
-
-        }
-
-
-    }
-
-    private void sendImageToGame(File file){
-
-        try {
-
-            channel.sendFile(file, null).queue();
-
-        } catch (IOException e){
-
-        }
 
     }
 
