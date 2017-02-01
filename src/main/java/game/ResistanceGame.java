@@ -1,5 +1,6 @@
 package main.java.game;
 
+import main.java.GameManager;
 import main.java.exceptions.PlayerNotFoundException;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -397,6 +398,12 @@ public class ResistanceGame {
     private void spiesWin() {
 
 
+
+    }
+
+    private void killSelf(){
+
+        GameManager.removeGame(this.channel);
 
     }
 
