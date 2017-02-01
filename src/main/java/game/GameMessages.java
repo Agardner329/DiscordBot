@@ -1,5 +1,6 @@
 package main.java.game;
 
+import main.java.DiscordBot;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 
@@ -19,7 +20,7 @@ class GameMessages {
     private static final File PASS = new File("resources/images/Pass.png");
     private static final File FAIL = new File("resources/images/Fail.png");
 
-    protected static void sendVoteResults(TextChannel channel, HashMap<User, Boolean> votes){
+    static void sendVoteResults(TextChannel channel, HashMap<User, Boolean> votes){
 
         BufferedImage resultImage = new BufferedImage(816 * votes.size(), 1110, BufferedImage.TYPE_INT_RGB);
         Graphics g = resultImage.getGraphics();
@@ -53,7 +54,7 @@ class GameMessages {
 
             sendImageToGame(channel, tempFile);
 
-            tempFile.delete();
+            DiscordBot.log("Deletion Success", "" + tempFile.delete());
 
         }catch (IOException e){
 
@@ -97,7 +98,7 @@ class GameMessages {
 
     }
 
-    protected static void sendMissionIntro(TextChannel channel, User[] currentMission){
+    static void sendMissionIntro(TextChannel channel, User[] currentMission){
 
         String message = "The proposed mission is: ";
 
@@ -115,7 +116,7 @@ class GameMessages {
 
     }
 
-    protected static void sendMissionSuccess(TextChannel channel, int numPass, int numFail){
+    static void sendMissionSuccess(TextChannel channel, int numPass, int numFail){
 
         BufferedImage resultImage = new BufferedImage(816 * (numPass + numFail), 1110, BufferedImage.TYPE_INT_RGB);
         Graphics g = resultImage.getGraphics();
@@ -142,7 +143,7 @@ class GameMessages {
 
             sendImageToGame(channel, tempFile);
 
-            tempFile.delete();
+            DiscordBot.log("Deletion Success", "" + tempFile.delete());
 
         }catch (IOException e){
 
@@ -154,7 +155,7 @@ class GameMessages {
 
     }
 
-    protected static void sendMissionFail(TextChannel channel, int numPass, int numFail){
+    static void sendMissionFail(TextChannel channel, int numPass, int numFail){
 
         BufferedImage resultImage = new BufferedImage(816 * (numPass + numFail), 1110, BufferedImage.TYPE_INT_RGB);
         Graphics g = resultImage.getGraphics();
@@ -181,7 +182,7 @@ class GameMessages {
 
             sendImageToGame(channel, tempFile);
 
-            tempFile.delete();
+            DiscordBot.log("Deletion Success", "" + tempFile.delete());
 
         }catch (IOException e){
 
@@ -193,7 +194,7 @@ class GameMessages {
 
     }
 
-    protected static void sendNewRoundMessage(TextChannel channel, User commander, int numMembers){
+    static void sendNewRoundMessage(TextChannel channel, User commander, int numMembers){
 
         sendMessageToGame(channel, commander.getName() + " is now the commander.\nThis mission will have " + numMembers + "members.");
 
@@ -259,7 +260,7 @@ class GameMessages {
 
     }
 
-    protected static void sendMessageToGame(TextChannel channel, String message){
+    static void sendMessageToGame(TextChannel channel, String message){
 
         channel.sendMessage(message).queue();
 
@@ -273,6 +274,8 @@ class GameMessages {
 
         } catch (IOException e){
 
+            e.printStackTrace();
+
         }
 
 
@@ -285,6 +288,8 @@ class GameMessages {
             channel.sendFile(file, null).queue();
 
         } catch (IOException e){
+
+            e.printStackTrace();
 
         }
 
