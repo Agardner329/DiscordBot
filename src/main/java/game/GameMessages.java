@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Created by Alex Gardner on 1/31/2017.
@@ -20,6 +21,18 @@ class GameMessages {
     private static final File NO = new File("resources/images/No.png");
     private static final File PASS = new File("resources/images/Pass.png");
     private static final File FAIL = new File("resources/images/Fail.png");
+
+    protected static void sendVoteResults(TextChannel channel, HashMap<User, Boolean> votes){
+
+
+
+    }
+
+    protected static void sendMissionIntro(TextChannel channel, User[] currentMission){
+
+
+
+    }
 
     protected static void sendMissionResults(TextChannel channel, boolean[] results){
 
