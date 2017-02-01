@@ -300,12 +300,6 @@ public class ResistanceGame {
 
         GameMessages.sendVoteResults(this.channel, this.voteTally);
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         if (this.voteResult(this.voteTally)) {
 //            GameMessages.sendMissionIntro(this.channel, this.currentMission);
             this.currentStatus = GameStatus.AWAITING_MISSION_RESULT;
@@ -364,13 +358,6 @@ public class ResistanceGame {
 
         GameMessages.sendMissionSuccess(this.channel, passes, fails);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
         this.numMissionsCompleted++;
         this.numSuccesses++;
         if (numSuccesses == 3) {
@@ -384,12 +371,6 @@ public class ResistanceGame {
     private void missionFailed(int passes, int fails) {
 
         GameMessages.sendMissionFail(this.channel, passes, fails);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         this.numMissionsCompleted++;
         this.numFailures++;
