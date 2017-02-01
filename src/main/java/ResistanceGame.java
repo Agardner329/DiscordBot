@@ -62,7 +62,9 @@ public class ResistanceGame {
     private User[] resistance;
 
     private User commander;
-    private User[] currentMission;
+    private int commanderIndex;
+
+    private ArrayList<User> currentMission;
 
     public ResistanceGame(User host, TextChannel channel){
 
@@ -171,7 +173,11 @@ public class ResistanceGame {
 
     private void setRoles() {
 
-        this.players = this.playerQueue.toArray(new User[this.playerQueue.size()]);
+        int numPlayers = this.getNumPlayers();
+
+        this.commanderIndex = (int) (Math.random() * numPlayers);
+
+        this.players = this.playerQueue.toArray(new User[numPlayers]);
 
         ArrayList<User> remainingPlayers = new ArrayList<>(this.playerQueue);
 
@@ -190,15 +196,18 @@ public class ResistanceGame {
 
     private void nextRound() {
 
-    }
-
-    public void setMission(User[] players){
-
-        this.currentStatus = GameStatus.AWAITING_MISSION_VOTE;
-
-        currentMission = players;
+        this.commanderIndex = (this.commanderIndex + 1) % this.players.length;
+        this.commander = this.players[this.commanderIndex];
 
     }
+
+//    public void setMission(User[] players){
+//
+//        this.currentStatus = GameStatus.AWAITING_MISSION_VOTE;
+//
+//        currentMission = players;
+//
+//    }
 
     public void addVote(User player, boolean pass){
 
