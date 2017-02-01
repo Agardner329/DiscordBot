@@ -38,7 +38,7 @@ public class FailCommand extends Command {
 
         }else{
 
-                GameManager.getGameOf(command.author).addMissionResult(command.author, false);
+            GameManager.getGameOf(command.author).addMissionResult(command.author, false);
 
         }
 
