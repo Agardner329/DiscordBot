@@ -30,6 +30,7 @@ public class YesCommand extends Command {
         }else{
 
             GameManager.getGameOf(command.author).addVote(command.author, true);
+            command.author.getPrivateChannel().sendMessage("Your vote has been tallied").queue();
 
         }
 

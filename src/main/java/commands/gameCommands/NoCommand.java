@@ -28,6 +28,7 @@ public class NoCommand extends Command {
         }else{
 
             GameManager.getGameOf(command.author).addVote(command.author, false);
+            command.author.getPrivateChannel().sendMessage("Your vote has been tallied").queue();
 
         }
 

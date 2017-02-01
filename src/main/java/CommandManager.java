@@ -24,7 +24,8 @@ public class CommandManager {
         YES(new YesCommand()),
         NO(new NoCommand()),
         PASS(new PassCommand()),
-        FAIL(new FailCommand());
+        FAIL(new FailCommand()),
+        LAUNCH(new LaunchCommand());
 
         public final Command command;
 

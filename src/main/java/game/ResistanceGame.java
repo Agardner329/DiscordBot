@@ -191,9 +191,13 @@ public class ResistanceGame {
     public boolean isOnCurrentMission(User player) {
 
         for (User other : this.players) {
-            if (player == other) {
+
+            if (player.equals(other)) {
+
                 return true;
+
             }
+
         }
 
         return false;
@@ -275,6 +279,8 @@ public class ResistanceGame {
 
         this.currentMission = members;
         this.currentStatus = GameStatus.AWAITING_MISSION_VOTE;
+
+        GameMessages.sendMissionIntro(this.channel, this.currentMission);
 
     }
 
