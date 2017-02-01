@@ -59,6 +59,9 @@ public class ResistanceGame {
     private HashMap<User, Boolean> voteTally;
     private HashMap<User, Boolean> missionResult;
 
+    private int numSuccesses;
+    private int numFailures;
+
     public ResistanceGame(User host, TextChannel channel){
 
         playerQueue = new ArrayList<>();
@@ -70,6 +73,8 @@ public class ResistanceGame {
         this.channel = channel;
 
         this.numMissionsCompleted = 0;
+        this.numSuccesses = 0;
+        this.numFailures = 0;
 
     }
 
@@ -221,6 +226,8 @@ public class ResistanceGame {
 
         this.setRoles();
 
+        this.nextRound();
+
     }
 
     private void setRoles() {
@@ -351,11 +358,45 @@ public class ResistanceGame {
 
         GameMessages.sendMissionSuccess(this.channel, passes, fails);
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        numSuccesses++;
+        if (numSuccesses == 3) {
+            this.resistanceWin();
+        }
+
     }
 
     private void missionFailed(int passes, int fails) {
 
         GameMessages.sendMissionFail(this.channel, passes, fails);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        numFailures++;
+        if (numFailures == 3) {
+            this.spiesWin();
+        }
+
+    }
+
+    private void resistanceWin() {
+
+        
+
+    }
+
+    private void spiesWin() {
+
+
 
     }
 
