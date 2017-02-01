@@ -102,42 +102,37 @@ class GameMessages {
 
     protected static void sendMissionIntro(TextChannel channel, User[] currentMission){
 
+        String message = "The proposed mission is: ";
 
+        for(User u : currentMission){
 
-    }
-
-    protected static void sendMissionResults(TextChannel channel, boolean[] results){
-
-        int numFails = 0;
-        int numSuccesses = 0;
-
-        for(boolean result : results){
-
-            if(result){
-
-                numSuccesses++;
-
-            }else{
-
-                numFails++;
-
-            }
+            message += u.getName() + " + ";
 
         }
 
-        BufferedImage resultImage = new BufferedImage(816 * results.length, 1110, BufferedImage.TYPE_INT_RGB);
+        message = message.substring(0, message.length() - 3);
+
+        message += "\nCast your votes by messaging me now";
+
+        sendMessageToGame(channel, message);
+
+    }
+
+    protected static void sendMissionSuccess(TextChannel channel, int numPass, int numFail){
+
+        BufferedImage resultImage = new BufferedImage(816 * (numPass + numFail), 1110, BufferedImage.TYPE_INT_RGB);
         Graphics g = resultImage.getGraphics();
         int currentX = 0;
 
         try {
-            for (int i = 0; i < numSuccesses; i++) {
+            for (int i = 0; i < numPass; i++) {
 
                 g.drawImage(ImageIO.read(PASS), currentX, 0, null);
                 currentX += 816;
 
             }
 
-            for (int i = 0; i < numFails; i++) {
+            for (int i = 0; i < numFail; i++) {
 
                 g.drawImage(ImageIO.read(FAIL), currentX, 0, null);
                 currentX += 816;
@@ -156,9 +151,48 @@ class GameMessages {
 
             e.printStackTrace();
 
+        }
 
+        sendMessageToGame(channel, "The mission passes with flag count: " + numPass + " passes, and " + numFail + "fails");
+
+    }
+
+    protected static void sendMissionFail(TextChannel channel, int numPass, int numFail){
+
+        BufferedImage resultImage = new BufferedImage(816 * (numPass + numFail), 1110, BufferedImage.TYPE_INT_RGB);
+        Graphics g = resultImage.getGraphics();
+        int currentX = 0;
+
+        try {
+            for (int i = 0; i < numPass; i++) {
+
+                g.drawImage(ImageIO.read(PASS), currentX, 0, null);
+                currentX += 816;
+
+            }
+
+            for (int i = 0; i < numFail; i++) {
+
+                g.drawImage(ImageIO.read(FAIL), currentX, 0, null);
+                currentX += 816;
+
+            }
+
+            File tempFile = new File("temp.png");
+
+            ImageIO.write(resultImage, "png", tempFile);
+
+            sendImageToGame(channel, tempFile);
+
+            tempFile.delete();
+
+        }catch (IOException e){
+
+            e.printStackTrace();
 
         }
+
+        sendMessageToGame(channel, "The mission fails with flag count: " + numPass + " passes, and " + numFail + "fails");
 
     }
 
