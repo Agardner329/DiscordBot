@@ -126,6 +126,22 @@ public class ResistanceGame {
 
     }
 
+    public boolean playerIsSpy(User player){
+
+        for(User u : spies){
+
+            if(u.equals(player)){
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+
     public User getPlayer(String playerName) throws PlayerNotFoundException{
 
         for(User u : players){
