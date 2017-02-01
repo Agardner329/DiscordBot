@@ -11,6 +11,8 @@ public class NoCommand extends Command {
     public NoCommand(){
 
         this.help = "Usage: !No";
+        this.canUseThroughServer = false;
+        this.canUseThroughDM = true;
 
     }
 
