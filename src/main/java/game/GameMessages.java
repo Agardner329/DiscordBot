@@ -196,11 +196,11 @@ class GameMessages {
 
     static void sendNewRoundMessage(TextChannel channel, User commander, int numMembers){
 
-        sendMessageToGame(channel, commander.getName() + " is now the commander.\nThis mission will have " + numMembers + "members.");
+        sendMessageToGame(channel, commander.getName() + " is now the commander.\nThis mission will have " + numMembers + " members.");
 
     }
 
-    protected static void sendSpyIntro(User[] spies){
+    static void sendSpyIntro(User[] spies){
 
         for(User u : spies){
 
@@ -242,7 +242,7 @@ class GameMessages {
 
     }
 
-    protected static void sendResistanceIntro(User[] resistance){
+    static void sendResistanceIntro(User[] resistance){
 
         for(User u : resistance){
 
@@ -251,6 +251,18 @@ class GameMessages {
             sendMessageToPlayer(u, "You are on the Resistance");
 
         }
+
+    }
+
+    static void sendResistanceWinMessage(TextChannel channel, int totalMissions) {
+
+        sendMessageToGame(channel, "Resistance wins with a score of 3 to " + (5 - totalMissions) + "!");
+
+    }
+
+    static void sendSpiesWinMessage(TextChannel channel, int totalMissions) {
+
+        sendMessageToGame(channel, "Spies win with a score of 3 to " + (5 - totalMissions) + "!");
 
     }
 

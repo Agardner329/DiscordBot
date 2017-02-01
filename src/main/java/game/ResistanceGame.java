@@ -365,7 +365,9 @@ public class ResistanceGame {
             e.printStackTrace();
         }
 
-        numSuccesses++;
+
+        this.numMissionsCompleted++;
+        this.numSuccesses++;
         if (numSuccesses == 3) {
             this.resistanceWin();
         }
@@ -382,7 +384,8 @@ public class ResistanceGame {
             e.printStackTrace();
         }
 
-        numFailures++;
+        this.numMissionsCompleted++;
+        this.numFailures++;
         if (numFailures == 3) {
             this.spiesWin();
         }
@@ -391,13 +394,17 @@ public class ResistanceGame {
 
     private void resistanceWin() {
 
-        
+        GameMessages.sendResistanceWinMessage(this.channel, this.numMissionsCompleted);
+
+        this.killSelf();
 
     }
 
     private void spiesWin() {
 
+        GameMessages.sendSpiesWinMessage(this.channel, this.numMissionsCompleted);
 
+        this.killSelf();
 
     }
 
