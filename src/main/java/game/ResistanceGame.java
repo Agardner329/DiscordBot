@@ -277,6 +277,7 @@ public class ResistanceGame {
 
     public void pushToVote(User[] members) {
 
+        int i;
         GameMessages.sendPrivateVoteMessage(this.players);
 
         this.currentMission = members;
@@ -297,6 +298,8 @@ public class ResistanceGame {
     }
 
     private void runMission() {
+
+        int i;
 
         GameMessages.sendPrivateMissionMessage(this.currentMission);
 

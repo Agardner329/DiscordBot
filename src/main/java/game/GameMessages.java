@@ -28,6 +28,8 @@ class GameMessages {
 
         }
 
+        return;
+
     }
 
     static void sendPrivateVoteMessage(User[] players){
@@ -37,6 +39,8 @@ class GameMessages {
             u.getPrivateChannel().sendMessage("A mission has been proposed, type !yes or !no").queue();
 
         }
+
+        return;
 
     }
 
