@@ -277,6 +277,8 @@ public class ResistanceGame {
 
     public void pushToVote(User[] members) {
 
+        GameMessages.sendPrivateVoteMessage(this.players);
+
         this.currentMission = members;
         this.currentStatus = GameStatus.AWAITING_MISSION_VOTE;
 
@@ -295,6 +297,8 @@ public class ResistanceGame {
     }
 
     private void runMission() {
+
+        GameMessages.sendPrivateMissionMessage(this.currentMission);
 
         this.missionResult = new HashMap<>();
 
