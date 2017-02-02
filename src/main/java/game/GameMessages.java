@@ -20,6 +20,26 @@ class GameMessages {
     private static final File PASS = new File("resources/images/Pass.png");
     private static final File FAIL = new File("resources/images/Fail.png");
 
+    static void sendPrivateMissionMessage(User[] players){
+
+        for(User u : players){
+
+            u.getPrivateChannel().sendMessage("You have been selected for a mission, type !pass or !fail").queue();
+
+        }
+
+    }
+
+    static void sendPrivateVoteMessage(User[] players){
+
+        for(User u : players){
+
+            u.getPrivateChannel().sendMessage("A mission has been proposed, type !yes or !no").queue();
+
+        }
+
+    }
+
     static void sendVoteResults(TextChannel channel, HashMap<User, Boolean> votes){
 
         BufferedImage resultImage = new BufferedImage(816 * votes.size(), 1110, BufferedImage.TYPE_INT_RGB);
